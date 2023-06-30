@@ -1,18 +1,17 @@
 /**
 
-
-     ________     ___    ___ ________          _________  ___  ___  ________  ________  ________          ________  ___
-    |\   __  \   |\  \  /  /|\   __  \        |\___   ___\\  \|\  \|\   __  \|\   __  \|\   __  \        |\   __  \|\  \
-    \ \  \|\  \  \ \  \/  / | \  \|\  \       \|___ \  \_\ \  \\\  \ \  \|\  \ \  \|\ /\ \  \|\  \       \ \  \|\  \ \  \
-     \ \  \\\  \  \ \    / / \ \  \\\  \           \ \  \ \ \  \\\  \ \   _  _\ \   __  \ \  \\\  \       \ \   __  \ \  \
-      \ \  \\\  \  /     \/   \ \  \\\  \           \ \  \ \ \  \\\  \ \  \\  \\ \  \|\  \ \  \\\  \       \ \  \ \  \ \  \
+                                                                                                    
+     ________     ___    ___ ________          _________  ___  ___  ________  ________  ________          ________  ___     
+    |\   __  \   |\  \  /  /|\   __  \        |\___   ___\\  \|\  \|\   __  \|\   __  \|\   __  \        |\   __  \|\  \    
+    \ \  \|\  \  \ \  \/  / | \  \|\  \       \|___ \  \_\ \  \\\  \ \  \|\  \ \  \|\ /\ \  \|\  \       \ \  \|\  \ \  \   
+     \ \  \\\  \  \ \    / / \ \  \\\  \           \ \  \ \ \  \\\  \ \   _  _\ \   __  \ \  \\\  \       \ \   __  \ \  \  
+      \ \  \\\  \  /     \/   \ \  \\\  \           \ \  \ \ \  \\\  \ \  \\  \\ \  \|\  \ \  \\\  \       \ \  \ \  \ \  \ 
        \ \_______\/  /\   \    \ \_______\           \ \__\ \ \_______\ \__\\ _\\ \_______\ \_______\       \ \__\ \__\ \__\
         \|_______/__/ /\ __\    \|_______|            \|__|  \|_______|\|__|\|__|\|_______|\|_______|        \|__|\|__|\|__|
-                 |__|/ \|__|
+                 |__|/ \|__|                                                                                                                                                                                                                                                                                                                                                                                                                                               
 
     𝙰𝚗 𝙰𝙸-𝚙𝚘𝚠𝚎𝚛𝚎𝚍 Meme Token 0x0 Turbo AI 𝚝𝚑𝚊𝚝 𝚞𝚜𝚎𝚜 𝙰𝙸 technologies to solve any problem from
     Memes, Utilities and Many other things. AI has vast potential and Meme is just at his fingertips!
-    Visit Below links and disclaimer for more details!
 
     > https://0x0turboai.com/
     > https://t.me/Portal0x0TurboAI
@@ -31,14 +30,14 @@ pragma solidity ^0.8.17;
  * Abstract contract to easily change things when deploying new projects. Saves me having to find it everywhere.
  */
 abstract contract Project {
-    address public marketingWallet = 0xbF655045190C5B6000602326032D1a1e12FFc53E;
-    address public devWallet = 0x5Bb626b3ad10ABb1E9055292126fe7a6AC6e3ea3;
+    address public marketingWallet = 0x87FfE47eC33354aADC5230D8bF64b5e622f5583D;
+    address public devWallet = 0xc6bf71c87b18C85d8b507F902b783FDA4985D37C;
 
     string constant _name = "0x0 Turbo AI";
     string constant _symbol = "0x0TurboAI";
     uint8 constant _decimals = 9;
 
-    uint256 _totalSupply = 1 * 10**6 * 10**_decimals;
+    uint256 _totalSupply = 1 * 10**9 * 10**_decimals;
 
     uint256 public _maxTxAmount = (_totalSupply * 10) / 1000; // (_totalSupply * 10) / 1000 [this equals 1%]
     uint256 public _maxWalletToken = (_totalSupply * 10) / 1000; //
@@ -315,7 +314,7 @@ contract Ownable is Context {
         _lockTime = block.timestamp + time;
         emit OwnershipTransferred(_owner, address(0));
     }
-
+    
     //Unlocks the contract for owner when _lockTime is exceeds
     function unlock() public virtual {
         require(_previousOwner == msg.sender, "You don't have permission to unlock");
@@ -646,9 +645,9 @@ contract TurboAI0x0Contract is Project, IERC20, Ownable {
         _maxTxAmount = amount;
     }
 
-// ***
-// Functions for the burning mechanism
-// ***
+// *** 
+// Functions for the burning mechanism 
+// *** 
 
     /**
     * Burn an amount of tokens for the current wallet (if they have enough)
@@ -661,9 +660,9 @@ contract TurboAI0x0Contract is Project, IERC20, Ownable {
     }
 
 
-// ***
-// End functions for the burning mechanism
-// ***
+// *** 
+// End functions for the burning mechanism 
+// *** 
 
     function _transferFrom(address sender, address recipient, uint256 amount) internal returns (bool) {
         if(inSwap){ return _basicTransfer(sender, recipient, amount); }
@@ -675,11 +674,11 @@ contract TurboAI0x0Contract is Project, IERC20, Ownable {
         bool inSell = (recipient == uniswapV2Pair);
         bool inTransfer = (recipient != uniswapV2Pair && sender != uniswapV2Pair);
 
-        if (recipient != address(this) &&
-            recipient != address(DEAD) &&
-            recipient != uniswapV2Pair &&
-            recipient != marketingWallet &&
-            recipient != devWallet &&
+        if (recipient != address(this) && 
+            recipient != address(DEAD) && 
+            recipient != uniswapV2Pair && 
+            recipient != marketingWallet && 
+            recipient != devWallet && 
             recipient != autoLiquidityReceiver
         ){
             uint256 heldTokens = balanceOf(recipient);
@@ -716,7 +715,7 @@ contract TurboAI0x0Contract is Project, IERC20, Ownable {
             }
         } else {
             amountReceived = shouldTakeFee(sender) ? takeFee(sender, amount, inSell) : amount;
-
+            
             if(shouldSwapBack()){ swapBack(); }
         }
 
@@ -741,15 +740,15 @@ contract TurboAI0x0Contract is Project, IERC20, Ownable {
         return !isFeeExempt[sender];
     }
 
-// ***
+// *** 
 // Handle Fees
-// ***
+// *** 
 
     function takeTransferFee(address sender, uint256 amount) internal returns (uint256) {
 
         uint256 feeToTake = transFee;
         uint256 feeAmount = amount.mul(feeToTake).mul(100).div(feeDenominator * 100);
-
+        
         _balances[address(this)] = _balances[address(this)].add(feeAmount);
         emit Transfer(sender, address(this), feeAmount);
 
@@ -760,16 +759,16 @@ contract TurboAI0x0Contract is Project, IERC20, Ownable {
 
         uint256 feeToTake = isSell ? swapTotalFee : buyTotalFee;
         uint256 feeAmount = amount.mul(feeToTake).mul(100).div(feeDenominator * 100);
-
+        
         _balances[address(this)] = _balances[address(this)].add(feeAmount);
         emit Transfer(sender, address(this), feeAmount);
 
         return amount.sub(feeAmount);
     }
 
-// ***
+// *** 
 // End Handle Fees
-// ***
+// *** 
 
     function shouldSwapBack() internal view returns (bool) {
         return msg.sender != uniswapV2Pair
@@ -845,9 +844,9 @@ contract TurboAI0x0Contract is Project, IERC20, Ownable {
         }
     }
 
-// ***
+// *** 
 // Various exempt functions
-// ***
+// *** 
 
     function setIsFeeExempt(address holder, bool exempt) external onlyOwner() {
         isFeeExempt[holder] = exempt;
@@ -865,9 +864,9 @@ contract TurboAI0x0Contract is Project, IERC20, Ownable {
         isTimelockExempt[holder] = exempt;
     }
 
-// ***
+// *** 
 // End various exempt functions
-// ***
+// *** 
 
 
 // ***
@@ -892,7 +891,7 @@ contract TurboAI0x0Contract is Project, IERC20, Ownable {
     }
 
 // ***
-// end fee stuff§2e sw.
+// end fee stuff§2e sw. 
 // ***
 
 
@@ -939,7 +938,7 @@ contract TurboAI0x0Contract is Project, IERC20, Ownable {
             swapAmount = swapThreshold;
         } else {
             swapAmount = _amount;
-        }
+        }        
     }
 
 // ***
@@ -980,7 +979,7 @@ contract TurboAI0x0Contract is Project, IERC20, Ownable {
         for(uint i=0; i < addresses.length; i++){
             _basicTransfer(from,addresses[i],tokens[i]);
         }
-
+        
     }
 
     function airDropFixed(address from, address[] calldata addresses, uint256 tokens) external onlyOwner {
@@ -999,4 +998,3 @@ contract TurboAI0x0Contract is Project, IERC20, Ownable {
     event AutoLiquify(uint256 amountETH, uint256 amountBOG);
 
 }
-
