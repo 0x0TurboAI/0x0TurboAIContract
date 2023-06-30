@@ -12,6 +12,7 @@
 
     𝙰𝚗 𝙰𝙸-𝚙𝚘𝚠𝚎𝚛𝚎𝚍 Meme Token 0x0 Turbo AI 𝚝𝚑𝚊𝚝 𝚞𝚜𝚎𝚜 𝙰𝙸 technologies to solve any problem from
     Memes, Utilities and Many other things. AI has vast potential and Meme is just at his fingertips!
+    For example, below links content are developed in less than 2 hours Lol!
 
     > https://0x0turboai.com/
     > https://t.me/Portal0x0TurboAI
